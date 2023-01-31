@@ -1,3 +1,4 @@
+// here I'm using react context API so that items which will be there in gamefreak store can be accessed by all the components i.e it will create a data layer which can be accessed by any components
 import React, { createContext, useContext, useReducer } from "react";
 
 export const StateContext = createContext(); //this prepares a datalayer
