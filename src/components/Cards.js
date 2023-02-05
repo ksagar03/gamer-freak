@@ -1,4 +1,5 @@
 import React from "react";
+import StarIcon from "@mui/icons-material/Star";
 
 const Cards = ({ image, title, price, ratings }) => {
   return (
@@ -17,9 +18,11 @@ const Cards = ({ image, title, price, ratings }) => {
             {Array(ratings)
               .fill()
               .map((_, i) => (
-                <p>⭐</p>
+                // <p>⭐</p>
+                <StarIcon sx={{ color: "yellow" }} />
               ))}
           </span>
+          <br />
           <div className="text-center">
             <button
               type="button"

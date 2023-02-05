@@ -7,7 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar fixed-top navbar-expand-sm navbar-primary bg-primary">
         <div className="container-fluid">
           <button
             className="navbar-toggler justify-content-start"
@@ -43,7 +43,7 @@ const Navbar = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success text-white" type="submit">
               Search
             </button>
           </form>
