@@ -3,6 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
+import { useStateValue } from "./StateProvider";
 
 const Navbar = () => {
   return (
@@ -43,7 +44,10 @@ const Navbar = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success text-white" type="submit">
+            <button
+              className="btn btn-outline-success text-white"
+              type="submit"
+            >
               Search
             </button>
           </form>
