@@ -3,8 +3,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
-
+import { useStateValue } from "./StateProvider";
 const Navbar = () => {
+  const [{ Cart }] = useStateValue();
   return (
     <div>
       <nav className="navbar fixed-top navbar-expand-sm navbar-primary bg-primary">
@@ -52,6 +53,7 @@ const Navbar = () => {
           </form>
           <IconButton aria-label="add to shopping cart">
             <AddShoppingCartIcon sx={{ color: "white" }} />
+            <span className= "small text-white">{Cart.length}</span>
           </IconButton>
         </div>
       </nav>
