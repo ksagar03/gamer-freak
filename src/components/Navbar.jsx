@@ -3,7 +3,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
-import { useStateValue } from "./StateProvider";
 
 const Navbar = () => {
   return (

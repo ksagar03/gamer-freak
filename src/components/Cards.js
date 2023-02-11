@@ -1,9 +1,8 @@
-import React from "react";
 import StarIcon from "@mui/icons-material/Star";
-import { useStateValue } from "./StateProvider";
+import {useStateValue} from "./StateProvider";
 
 const Cards = ({ id, image, title, price, ratings }) => {
-  const [{Basket},dispatch] = useStateValue();
+  const [{ Cart }, dispatch] = useStateValue();
   const add_to_cart = () => {
     dispatch({
       type: "ADD_TO_CART",
