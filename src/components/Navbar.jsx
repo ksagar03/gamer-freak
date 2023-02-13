@@ -25,8 +25,7 @@ const Navbar = () => {
             <ul className="navbar-nav mr-auto justify-content-end">
               <li className="nav-item active">
                 <IconButton>
-                  {" "}
-                  <HomeIcon sx={{ color: "white" }} />{" "}
+                  <HomeIcon sx={{ color: "white" }} />
                 </IconButton>
                 <IconButton
                   aria-label="Sign In or Sign Out"
@@ -53,7 +52,7 @@ const Navbar = () => {
           </form>
           <IconButton aria-label="add to shopping cart">
             <AddShoppingCartIcon sx={{ color: "white" }} />
-            <span className= "small text-white">{Cart.length}</span>
+            <span className="small text-white">{Cart.length}</span>
           </IconButton>
         </div>
       </nav>
