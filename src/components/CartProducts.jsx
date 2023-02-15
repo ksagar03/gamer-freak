@@ -3,7 +3,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 const CartProducts = ({ id, image, title, price, ratings }) => {
   return (
-    <div style={{ maxWidth: "540px" }} className="card mb-3">
+    <div style={{ maxWidth: "800px" }} className="card mb-3">
       <div className="row g-0">
         <div className="col-md-4">
           <img src={image} alt="" className="img-fluid rounded-start" />

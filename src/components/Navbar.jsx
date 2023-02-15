@@ -26,7 +26,11 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto justify-content-end">
               <li className="nav-item active">
-                <IconButton>
+                <IconButton
+                  onClick={(e) => {
+                    navigate("/");
+                  }}
+                >
                   <HomeIcon sx={{ color: "white" }} />
                 </IconButton>
                 <IconButton
