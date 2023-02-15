@@ -20,9 +20,13 @@ function App() {
         <Route
           path="/cart"
           element={
-            <div>
-              <Navbar />
-              <UserCart />
+            <div className="container-fluid">
+              <div className="row  ">
+                <Navbar />
+              </div>
+              <div className="row mt-5">
+                <UserCart />
+              </div>
             </div>
           }
         />
