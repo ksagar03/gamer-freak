@@ -7,7 +7,7 @@ const UserCart = () => {
   const [{ Cart }, dispactch] = useStateValue();
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 text-white">
       <h5>Hello Guest</h5>
       <h2>Your Cart</h2>
       <div>

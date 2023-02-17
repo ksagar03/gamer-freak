@@ -1,5 +1,6 @@
 import StarIcon from "@mui/icons-material/Star";
-import {useStateValue} from "./StateProvider";
+import Currency from "./Currency";
+import { useStateValue } from "./StateProvider";
 
 const Cards = ({ id, image, title, price, ratings }) => {
   const [{ Cart }, dispatch] = useStateValue();
@@ -24,8 +25,7 @@ const Cards = ({ id, image, title, price, ratings }) => {
         <div className="card-body text-white">
           <h6 className="card-title mt-2">{title}</h6>
           <h5 className="card-title mt-1">
-            <span>₹</span>
-            {price}
+            <Currency price_value={price} />
           </h5>
           <span className="d-flex flex-row">
             {Array(ratings)

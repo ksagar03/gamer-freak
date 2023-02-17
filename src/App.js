@@ -20,7 +20,7 @@ function App() {
         <Route
           path="/cart"
           element={
-            <div className="container-fluid">
+            <div className="container-fluid bg-dark">
               <div className="row  ">
                 <Navbar />
               </div>
