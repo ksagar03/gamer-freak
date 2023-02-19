@@ -1,8 +1,18 @@
 import React from "react";
 import StarIcon from "@mui/icons-material/Star";
 import Currency from "./Currency";
+import { useStateValue } from "./StateProvider";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button, IconButton } from "@mui/material";
 
 const CartProducts = ({ id, image, title, price, ratings }) => {
+  const [{ Cart }, dispatch] = useStateValue();
+  function RemoveFromCart() {
+    dispatch({
+      type: "REMOVE_FROM_THE_CART",
+      id: id,
+    });
+  }
   return (
     <div style={{ maxWidth: "800px" }} className="card mb-3 text-white">
       <div className="row g-0">
@@ -11,17 +21,38 @@ const CartProducts = ({ id, image, title, price, ratings }) => {
         </div>
         <div className="col-md-8 bg-dark">
           <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <h5>
+            <h6 className="">{title}</h6>
+            <h6>
               <Currency price_value={price} />
-            </h5>
-            <span className="d-flex flex-row">
+            </h6>
+            <span className="d-flex flex-row mb-2">
               {Array(ratings)
                 .fill()
                 .map((_, i) => (
-                  <StarIcon sx={{ color: "yellow" }} />
+                  <StarIcon sx={{ color: "yellow" }} fontSize="small" />
                 ))}
             </span>
+            {/* bellow Button component is material ui component  */}
+            <Button 
+              variant="contained"
+              onClick={RemoveFromCart}
+              endIcon={<DeleteIcon />}
+              color="warning"
+            >
+              Remove From Cart
+              {/* <IconButton>
+                <DeleteIcon sx={{ color: "white" }} />
+              </IconButton> */}
+            </Button>
+            {/* <button
+              type="button"
+              className="btn btn-outline-warning btn-block text-center text-white avtive"
+              onClick={RemoveFromCart}
+            >
+              Remove From Cart{" "}
+              <IconButton size="small">  <DeleteIcon sx={{ color: "white" }} fontSize="small" /></IconButton>
+              {/* <DeleteIcon sx={{ color: "white" }} fontSize="small" /> */}
+            {/* </button> */} 
           </div>
         </div>
       </div>
