@@ -45,6 +45,33 @@ const Home = () => {
             price={172000}
             ratings={3}
           />
+          <Cards
+            id={4}
+            image={
+              "https://m.media-amazon.com/images/I/81dqVCIh4DS._AC_UL480_FMwebp_QL65_.jpg"
+            }
+            title="HEERRAV RETAIL Multi-Functional Ergonomic Gaming Chair, Premium Leatherette Chair, Adjustable Neck & Lumbar Pillow, 4D Adjustable Armrests."
+            price={14999}
+            ratings={4}
+          />
+          <Cards
+            id={5}
+            image={
+              "https://m.media-amazon.com/images/I/61eWHqJJX2L._AC_UY327_FMwebp_QL65_.jpg"
+            }
+            title="G.SKILL Trident Z Neo 32GB (2 * 16GB) DDR4 3600MHz CL18-22-22-42 1.35V Desktop Memory RAM - F4-3600C18D-32GTZN"
+            price={13831}
+            ratings={5}
+          />
+          <Cards
+            id={6}
+            image={
+              "https://m.media-amazon.com/images/I/51XaTRLDaIL._AC_UY327_FMwebp_QL65_.jpg"
+            }
+            title="ASUS ROG Ryujin II 360 All-in-one Liquid CPU Cooler with 3.5 LCD, Embedded Pump Fan and 3X Noctua iPPC 2000 PWM 120mm Radiator Fans, Black."
+            price={32000}
+            ratings={4}
+          />
         </div>
       </div>
     </div>
