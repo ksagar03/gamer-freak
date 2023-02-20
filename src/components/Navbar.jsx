@@ -10,7 +10,7 @@ const Navbar = () => {
   const [{ Cart }] = useStateValue();
   return (
     <div>
-      <nav className="navbar fixed-top navbar-expand-sm navbar-primary bg-primary">
+      <nav className="navbar fixed-top navbar-expand-sm navbar-primary gradient-custom">
         <div className="container-fluid">
           <button
             className="navbar-toggler justify-content-start"

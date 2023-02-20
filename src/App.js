@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 // import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
 import UserCart from "./components/UserCart";
+import SignIn from "./components/SignIn";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
             </div>
           }
         />
+        <Route
+        path="/sign"
+        element={
+          <div>
+            <SignIn/>
+          </div>
+        }/>
+
       </Routes>
     </Router>
   );
