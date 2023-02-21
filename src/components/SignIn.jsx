@@ -1,8 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const SignIn = () => {
   return (
-    <section className="gradient-custom">
+    <section className=" gradient-custom">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div
@@ -15,16 +15,35 @@ const SignIn = () => {
                 <p className="text-white-50 mb-5">
                   Please enter yoru login-id and password
                 </p>
-                <div className="form-outline form-white mb-4">
+                <div className="form-floating  mb-3">
                   <input
                     type="email"
-                    id="typeEmailX"
-                    className="form-control form-control-lg"
+                    id="typeEmail"
+                    className="form-control form-control-lg bg-dark text-white"
                   />
-                  <label className="form-label" for="typeEmailX">
-                    Email
-                  </label>
+                  <label for="typeEmail">Email</label>
                 </div>
+                <div className="form-floating  mt-4 mb-3">
+                  <input
+                    type="passwrod"
+                    id="typePassword"
+                    className="form-control form-control-lg bg-dark text-white"
+                  />
+                  <label for="typePasswrod">Password</label>
+                </div>
+                <p className="small mb-5 pb-lg-2">
+                  <Link className="text-white-50">Forgot passwrod?</Link>
+                </p>
+                <button
+                  className="btn btn-outline-light btn-lg px-5 mb-4"
+                  type="submit"
+                >
+                  Login
+                </button>
+                <p className="mb-0">
+                  Don't have an account?{" "}
+                  <Link className="text-white-50 fw-bold">Sign up</Link>
+                </p>
               </div>
             </div>
           </div>
