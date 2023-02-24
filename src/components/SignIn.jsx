@@ -1,16 +1,22 @@
+import { IconButton } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+
 const SignIn = () => {
+  const navigate=useNavigate();
   return (
     <section className=" gradient-custom">
-      <div className="container py-5 h-100">
+      <div className="container py-5 h-100" style={{minWidth:"60%", maxWidth:"80%" }}>
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div
             className="card bg-dark text-white"
             style={{ borderRadius: "1rem" }}
           >
             <div className="card-body p-5 text-center">
-              <div className="mb-md-5 mt-md-4 pb-5">
+              <IconButton onClick={(e)=>{navigate("/")}}>
+              <img  src="https://icons.iconarchive.com/icons/bokehlicia/captiva/256/games-icon.png" alt="" style={{width:"30px", height:"30px"}} />
+              </IconButton>
+              <div className="mb-md-5  pb-5">
                 <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                 <p className="text-white-50 mb-5">
                   Please enter yoru login-id and password

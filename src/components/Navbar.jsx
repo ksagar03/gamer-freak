@@ -36,6 +36,9 @@ const Navbar = () => {
                 <IconButton
                   aria-label="Sign In or Sign Out"
                   className="text-white"
+                  onClick={(e) => {
+                    navigate("/sign");
+                  }}
                 >
                   <AccountCircleIcon sx={{ color: "white" }} />
                 </IconButton>
