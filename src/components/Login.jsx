@@ -45,7 +45,7 @@ const Login = () => {
                             <i className="input-icon uil uil-lock-alt">
                             </i>
                           </div>
-                          <a href="/" className="btn mt-4">Submit</a>
+                          <a href="/" className="btn btn-outline mt-4">Submit</a>
                           <p className="mb-0 mt-4 text-center"><a href="/" className="link">forget your password</a></p>
                         </div>
                       </div>
