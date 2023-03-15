@@ -18,7 +18,7 @@ const Login = () => {
                   id="login"
                   name="login"
                 />
-                <label for="login"></label>
+                <label htmlFor="login"></label>
                 <div className="card-3d-wrap mx-auto">
                   <div className="card-3d-wrapper">
                     <div className="card-front">
@@ -41,11 +41,12 @@ const Login = () => {
                             className="form-style"
                             placeholder="Your Password"
                             id="log_password"
-                            autoComplete="off"/>
+                            autoComplete="off"
+                            />
                             <i className="input-icon uil uil-lock-alt">
                             </i>
                           </div>
-                          <a href="/" className="btn btn-outline mt-4">Submit</a>
+                          <a href="/" className="btn btn-outline-warning mt-4">Submit</a>
                           <p className="mb-0 mt-4 text-center"><a href="/" className="link">forget your password</a></p>
                         </div>
                       </div>
@@ -78,7 +79,7 @@ const Login = () => {
                                     autoComplete="off" />
                                     <i className="input-icon uil uil-lock-alt"></i>  
                                 </div>
-                                <a href="/1" className="btn mt-4">Submit</a>
+                                <a href="/1" className="btn btn-outline-warning mt-4">Submit</a>
                             </div>
                         </div>
                     </div>
