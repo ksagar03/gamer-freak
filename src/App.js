@@ -3,8 +3,8 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 // import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
 import UserCart from "./components/UserCart";
-import SignIn from "./components/SignIn";
 import Login from "./components/Login";
+import SubTotal from "./components/SubTotal";
 
 function App() {
   return (
@@ -29,14 +29,15 @@ function App() {
               <div className="row mt-5">
                 <UserCart />
               </div>
+
             </div>
           }
         />
         <Route
-        path="/sign"
+        path="/sub"
         element={
           <div>
-            <SignIn/>
+            <SubTotal/>
           </div>
         }/>
         <Route

@@ -31,7 +31,7 @@ h4 {
   font-weight: 600;
 }
 h6 span {
-  padding: 0 20px;
+  padding: 20px;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -47,14 +47,14 @@ h6 span {
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked) {
   position: absolute;
-  left: -9999px;
+  left: -10000px;
 }
 .checkbox:checked + label,
 .checkbox:not(:checked) + label {
   position: relative;
   display: block;
   text-align: center;
-  width: 60px;
+  width: 75px;
   height: 16px;
   border-radius: 8px;
   padding: 0;
@@ -72,7 +72,7 @@ h6 span {
   color: #ffeba7;
   background-color: #102770;
   font-family: "unicons";
-  content: "\eb4f";
+  content: "⇱";
   z-index: 20;
   top: -10px;
   left: -10px;
@@ -109,10 +109,12 @@ h6 span {
   width: 100%;
   height: 100%;
   background-color: #2a2b38;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
+  /* background-image: url("https://thumbs.gfycat.com/AbandonedAnguishedCatfish-size_restricted.gif"); */
+
+  background-image: url("https://i.pinimg.com/564x/60/20/8b/60208b4f19aadad329833029fb6220f7.jpg");
   background-position: bottom center;
   background-repeat: no-repeat;
-  background-size: 300%;
+  background-size: 99%;
   position: absolute;
   border-radius: 6px;
   left: 0;
