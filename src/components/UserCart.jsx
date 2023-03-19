@@ -2,7 +2,7 @@ import { useStateValue } from "./StateProvider";
 
 import React from "react";
 import CartProducts from "./CartProducts";
-
+import SubTotal from "./SubTotal";
 const UserCart = () => {
   const [{ Cart }, dispactch] = useStateValue();
 
@@ -21,6 +21,7 @@ const UserCart = () => {
           ratings={item.ratings}
           />
         ))}
+        <SubTotal/>
       </div>
     </div>
     
