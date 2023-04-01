@@ -36,11 +36,19 @@ const Navbar = () => {
                 <IconButton
                   aria-label="Sign In or Sign Out"
                   className="text-white"
-                  onClick={(e) => {
-                    navigate("/login");
-                  }}
-                >
-                  <AccountCircleIcon sx={{ color: "white" }} />
+                  >
+                   <div className="dropdown"data-bs-toggle="dropdown"
+                  id="dropdownmenu" >
+                  <AccountCircleIcon sx={{ color: "white" }}  />
+                  <ul className="dropdown-menu">
+                  <li>
+                       <span className="dropdown-item-text">hello</span> 
+                       <button className="btn btn-warning btn-outline">
+                        SignIN
+                       </button>
+                      </li>
+                     </ul>
+                  </div>
                 </IconButton>
               </li>
             </ul>

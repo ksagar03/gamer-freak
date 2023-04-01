@@ -2,25 +2,28 @@ import React, { useState } from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth"
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername]=useState("")
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupemail, setSignupemail]=useState("");
+  const [signuppassword, setSignuppassword]=useState("");
   const LogIN = (e) => {
     e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
+    
+      signInWithEmailAndPassword(auth,email, password)
+      .then((userCredential) => {
+        
         navigate("/");
       })
       .catch((error) => alert(error.message));
   };
   const signUP = (e) => {
     e.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
+      createUserWithEmailAndPassword(auth,signupemail, signuppassword)
+      .then((userCredential) => {
         navigate("/");
       })
       .catch((error) => alert(error.message));
@@ -53,7 +56,7 @@ const Login = () => {
                             <input
                               type="email"
                               value={email}
-                              onChange={(e)=> setEmail(e.target.value)}
+                              onChange={(e) => setEmail(e.target.value)}
                               name="log_email"
                               className="form-style"
                               placeholder="please enter your Email"
@@ -66,7 +69,7 @@ const Login = () => {
                             <input
                               type="password"
                               value={password}
-                              onChange={(e)=> setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value)}
                               name="log_password"
                               className="form-style"
                               placeholder="Your Password"
@@ -75,7 +78,10 @@ const Login = () => {
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
-                          <button onClick={LogIN} className="btn btn-outline-warning mt-4">
+                          <button
+                            onClick={LogIN}
+                            className="btn btn-outline-warning mt-4"
+                          >
                             Submit
                           </button>
                           <p className="mb-0 mt-4 text-center">
@@ -94,7 +100,7 @@ const Login = () => {
                             <input
                               type="text"
                               value={username}
-                              onChange={(e)=> setUsername(e.target.value)}
+                              onChange={(e) => setUsername(e.target.value)}
                               name="signup_name"
                               className="form-style"
                               placeholder="your full Name"
@@ -106,8 +112,8 @@ const Login = () => {
                           <div className="form-group mt-2">
                             <input
                               type="email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
+                              value={signupemail}
+                              onChange={(e) => setSignupemail(e.target.value)}
                               name="signup_email"
                               className="form-style"
                               placeholder="Your Email"
@@ -119,8 +125,8 @@ const Login = () => {
                           <div className="form-group mt-2">
                             <input
                               type="password"
-                              value={password}
-                              onChange={(e)=> setPassword(e.targetvalue)}
+                              value={signuppassword}
+                              onChange={(e) => setSignuppassword(e.targetvalue)}
                               name="signup_password"
                               className="form-style"
                               placeholder="Your Password"
@@ -129,7 +135,10 @@ const Login = () => {
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
-                          <button onClick={signUP} className="btn btn-outline-warning mt-4">
+                          <button
+                            onClick={signUP}
+                            className="btn btn-outline-warning mt-4"
+                          >
                             Submit
                           </button>
                         </div>
