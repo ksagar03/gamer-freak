@@ -1,33 +1,45 @@
 import React, { useState } from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import {signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth"
+// import { auth } from "../firebase";
+// import {
+//   signInWithEmailAndPassword,
+//   createUserWithEmailAndPassword,
+// } from "firebase/auth";
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [signupemail, setSignupemail]=useState("");
-  const [signuppassword, setSignuppassword]=useState("");
-  const LogIN = (e) => {
-    e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
-    
-      signInWithEmailAndPassword(auth,email, password)
-      .then((userCredential) => {
-        
-        navigate("/");
-      })
-      .catch((error) => alert(error.message));
-  };
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [signupemail, setSignupemail]=useState("");
+  // const [signuppassword, setSignuppassword]=useState("");
+  const [signupvalues, setSignupvalues] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [loginvalues, setLoginvalues] = useState({
+    email: "",
+    password: "",
+  });
+  // const LogIN = (e) => {
+  //   e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
+
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       navigate("/");
+  //     })
+  //     .catch((error) => alert(error.message));
+  // };
   const signUP = (e) => {
     e.preventDefault();
-      createUserWithEmailAndPassword(auth,signupemail, signuppassword)
-      .then((userCredential) => {
-        navigate("/");
-      })
-      .catch((error) => alert(error.message));
+  //   createUserWithEmailAndPassword(auth, signupemail, signuppassword)
+  //     .then((userCredential) => {
+  //       navigate("/");
+  //     })
+  //     .catch((error) => alert(error.message));
   };
+  console.log(signupvalues)
   return (
     <div>
       <div className="section">
@@ -55,8 +67,13 @@ const Login = () => {
                           <div className="form-group">
                             <input
                               type="email"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
+                              // value={email}
+                              onChange={(e) =>
+                                setLoginvalues((prev) => ({
+                                  ...prev,
+                                  email: e.target.value,
+                                }))
+                              }
                               name="log_email"
                               className="form-style"
                               placeholder="please enter your Email"
@@ -68,8 +85,13 @@ const Login = () => {
                           <div className="form-group mt-2">
                             <input
                               type="password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
+                              // value={password}
+                              onChange={(e) =>
+                                setLoginvalues((prev) => ({
+                                  ...prev,
+                                  password: e.target.value,
+                                }))
+                              }
                               name="log_password"
                               className="form-style"
                               placeholder="Your Password"
@@ -79,7 +101,7 @@ const Login = () => {
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
                           <button
-                            onClick={LogIN}
+                            // onClick={LogIN}
                             className="btn btn-outline-warning mt-4"
                           >
                             Submit
@@ -99,8 +121,13 @@ const Login = () => {
                           <div className="form-group">
                             <input
                               type="text"
-                              value={username}
-                              onChange={(e) => setUsername(e.target.value)}
+                              // value={username}
+                              onChange={(e) =>
+                                setSignupvalues((prev) => ({
+                                  ...prev,
+                                  name: e.target.value,
+                                }))
+                              }
                               name="signup_name"
                               className="form-style"
                               placeholder="your full Name"
@@ -112,8 +139,13 @@ const Login = () => {
                           <div className="form-group mt-2">
                             <input
                               type="email"
-                              value={signupemail}
-                              onChange={(e) => setSignupemail(e.target.value)}
+                              // value={signupemail}
+                              onChange={(e) =>
+                                setSignupvalues((prev) => ({
+                                  ...prev,
+                                  email: e.target.value,
+                                }))
+                              }
                               name="signup_email"
                               className="form-style"
                               placeholder="Your Email"
@@ -125,8 +157,13 @@ const Login = () => {
                           <div className="form-group mt-2">
                             <input
                               type="password"
-                              value={signuppassword}
-                              onChange={(e) => setSignuppassword(e.targetvalue)}
+                              // value={signuppassword}
+                              onChange={(e) =>
+                                setSignupvalues((prev) => ({
+                                  ...prev,
+                                  password: e.target.value,
+                                }))
+                              }
                               name="signup_password"
                               className="form-style"
                               placeholder="Your Password"
@@ -153,6 +190,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

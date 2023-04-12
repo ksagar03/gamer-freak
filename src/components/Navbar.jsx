@@ -41,12 +41,16 @@ const Navbar = () => {
                   id="dropdownmenu" >
                   <AccountCircleIcon sx={{ color: "white" }}  />
                   <ul className="dropdown-menu">
-                  <li>
-                       <span className="dropdown-item-text">hello</span> 
-                       <button className="btn btn-warning btn-outline">
+                  <li className="text-center ">
+                       <span className="dropdown-item-text">Hello Guest,</span> 
+                      </li>
+                    <li className="text-center">
+                    
+                   <button className="btn btn-warning btn-outline"
+                       onClick={e=>navigate("/login")}>
                         SignIN
                        </button>
-                      </li>
+                       </li>
                      </ul>
                   </div>
                 </IconButton>
