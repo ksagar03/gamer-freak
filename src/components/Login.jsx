@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
-// import { auth } from "../firebase";
-// import {
-//   signInWithEmailAndPassword,
-//   createUserWithEmailAndPassword,
-// } from "firebase/auth";
+import { auth } from "../firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 const Login = () => {
   const navigate = useNavigate();
   // const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ const Login = () => {
   // const [password, setPassword] = useState("");
   // const [signupemail, setSignupemail]=useState("");
   // const [signuppassword, setSignuppassword]=useState("");
+  const [errormsg, setErrormsg] = useState("");
   const [signupvalues, setSignupvalues] = useState({
     name: "",
     email: "",
@@ -22,24 +24,39 @@ const Login = () => {
     email: "",
     password: "",
   });
-  // const LogIN = (e) => {
-  //   e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
-
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       navigate("/");
-  //     })
-  //     .catch((error) => alert(error.message));
-  // };
+  const LogIN = (e) => {
+    e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
+    if (!loginvalues.email || !loginvalues.password) {
+      setErrormsg("Please enter all the fields");
+      return;
+    }
+    setErrormsg("");
+    signInWithEmailAndPassword(auth, loginvalues.email, loginvalues.password)
+      .then((userCredential) => {
+        console.log(userCredential.user);
+        navigate("/");
+      })
+      .catch((error) => setErrormsg(error.message));
+  };
   const signUP = (e) => {
     e.preventDefault();
-  //   createUserWithEmailAndPassword(auth, signupemail, signuppassword)
-  //     .then((userCredential) => {
-  //       navigate("/");
-  //     })
-  //     .catch((error) => alert(error.message));
+    if (!signupvalues.name || !signupvalues.email || !signupvalues.password) {
+      setErrormsg("Please enter all the fields");
+      return;
+    } else setErrormsg("");
+
+    createUserWithEmailAndPassword(
+      auth,
+      signupvalues.email,
+      signupvalues.password
+    )
+      .then((userCredential) => {
+        updateProfile(userCredential.user, { displayName: signupvalues.name });
+        navigate("/");
+        console.log(userCredential.user);
+      })
+      .catch((error) => setErrormsg(error.message));
   };
-  console.log(signupvalues)
   return (
     <div>
       <div className="section">
@@ -56,6 +73,7 @@ const Login = () => {
                   className="checkbox"
                   id="login"
                   name="login"
+                  onClick={() => setErrormsg("")} // if we move from signin page to login page or visversa error message will set to empty string
                 />
                 <label htmlFor="login"></label>
                 <div className="card-3d-wrap mx-auto">
@@ -100,15 +118,18 @@ const Login = () => {
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
+                          <p className="mt-4" style={{ color: "red" }}>
+                            {errormsg}
+                          </p>
                           <button
-                            // onClick={LogIN}
-                            className="btn btn-outline-warning mt-4"
+                            onClick={LogIN}
+                            className="btn btn-outline-warning mt-2"
                           >
                             Submit
                           </button>
                           <p className="mb-0 mt-4 text-center">
                             <a href="/" className="link">
-                              forget your password
+                              forget your password?
                             </a>
                           </p>
                         </div>
@@ -172,9 +193,12 @@ const Login = () => {
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
+                          <p className="mt-4" style={{ color: "red" }}>
+                            {errormsg}
+                          </p>
                           <button
                             onClick={signUP}
-                            className="btn btn-outline-warning mt-4"
+                            className="btn btn-outline-warning mt-2"
                           >
                             Submit
                           </button>
@@ -190,6 +214,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

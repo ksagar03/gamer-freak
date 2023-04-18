@@ -5,9 +5,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 const Navbar = () => {
   const navigate = useNavigate();
-  const [{ Cart }] = useStateValue();
+  const [{ Cart, user_name }] = useStateValue();
+  const HandleSignOut = () => {
+    auth.signOut();
+    navigate(!user_name && "/login");
+  };
   return (
     <div>
       <nav className="navbar fixed-top navbar-expand-sm navbar-primary gradient-custom">
@@ -36,22 +41,28 @@ const Navbar = () => {
                 <IconButton
                   aria-label="Sign In or Sign Out"
                   className="text-white"
+                >
+                  <div
+                    className="dropdown"
+                    data-bs-toggle="dropdown"
+                    id="dropdownmenu"
                   >
-                   <div className="dropdown"data-bs-toggle="dropdown"
-                  id="dropdownmenu" >
-                  <AccountCircleIcon sx={{ color: "white" }}  />
-                  <ul className="dropdown-menu">
-                  <li className="text-center ">
-                       <span className="dropdown-item-text">Hello Guest,</span> 
+                    <AccountCircleIcon sx={{ color: "white" }} />
+                    <ul className="dropdown-menu">
+                      <li className="text-center ">
+                        <span className="dropdown-item-text">
+                          Hello {user_name ? user_name : "Guest"},
+                        </span>
                       </li>
-                    <li className="text-center">
-                    
-                   <button className="btn btn-warning btn-outline"
-                       onClick={e=>navigate("/login")}>
-                        SignIN
-                       </button>
-                       </li>
-                     </ul>
+                      <li className="text-center">
+                        <button
+                          className="btn btn-warning btn-outline"
+                          onClick={HandleSignOut}
+                        >
+                          {user_name ? "Sign Out" : "Sign IN"}
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </IconButton>
               </li>

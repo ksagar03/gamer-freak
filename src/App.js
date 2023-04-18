@@ -5,8 +5,22 @@ import Navbar from "./components/Navbar";
 import UserCart from "./components/UserCart";
 import Login from "./components/Login";
 import SubTotal from "./components/SubTotal";
+import { useEffect } from "react";
+import { auth } from "./firebase";
+import { useStateValue } from "./components/StateProvider";
 
 function App() {
+  const [{}, dispatch]=useStateValue();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) =>{ 
+      if(user){
+        dispatch({
+          type: "USER_NAME",
+          user_name: user.displayName
+        })
+      }
+      console.log(user)});
+  }, []);
   return (
     <Router>
       <Routes>
@@ -29,26 +43,25 @@ function App() {
               <div className="row mt-5">
                 <UserCart />
               </div>
-
             </div>
           }
         />
         <Route
-        path="/sub"
-        element={
-          <div>
-            <SubTotal/>
-          </div>
-        }/>
-        <Route
-        path="/login"
-        element={
-          <div>
-           <Login />
-          </div>
-        }
+          path="/sub"
+          element={
+            <div>
+              <SubTotal />
+            </div>
+          }
         />
-
+        <Route
+          path="/login"
+          element={
+            <div>
+              <Login />
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );
