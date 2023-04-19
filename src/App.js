@@ -8,18 +8,25 @@ import SubTotal from "./components/SubTotal";
 import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useStateValue } from "./components/StateProvider";
+import Payment from "./components/Payment";
 
 function App() {
-  const [{}, dispatch]=useStateValue();
+  const [{}, dispatch] = useStateValue();
   useEffect(() => {
-    auth.onAuthStateChanged((user) =>{ 
-      if(user){
+    auth.onAuthStateChanged((user) => {
+      if (user) {
         dispatch({
           type: "USER_NAME",
-          user_name: user.displayName
+          user_name: user.displayName,
+        });
+      }else {
+        dispatch({
+          type: "USER_NAME",
+          user_name: null
         })
       }
-      console.log(user)});
+      console.log(user);
+    });
   }, []);
   return (
     <Router>
@@ -62,6 +69,13 @@ function App() {
             </div>
           }
         />
+        <Route
+        path="/payment"
+        element={
+        <div>
+          <Payment/>
+        </div>
+        }/>
       </Routes>
     </Router>
   );
