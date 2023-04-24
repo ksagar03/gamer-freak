@@ -4,7 +4,7 @@ import React from "react";
 import CartProducts from "./CartProducts";
 import SubTotal from "./SubTotal";
 const UserCart = () => {
-  const [{ Cart }, dispactch] = useStateValue();
+  const [{ Cart, user_name }] = useStateValue();
   const toshowsubtotal = (c) => {
     if (c === 0) {
       return (
@@ -18,7 +18,7 @@ const UserCart = () => {
   };
   return (
     <div className="mt-4 text-white">
-      <h5>Hello Guest</h5>
+      <h5>Hello {user_name ? user_name : "Guest"}</h5>
       <h2>Your Cart</h2>
       <div>
         {Cart.map((item) => (
