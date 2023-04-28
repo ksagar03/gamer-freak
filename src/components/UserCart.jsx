@@ -18,9 +18,12 @@ const UserCart = () => {
   };
   return (
     <div className="mt-4 text-white">
-      <h5>Hello {user_name ? user_name : "Guest"}</h5>
+      <h5 className=" mt-2 ">Hello {user_name ? user_name : "Guest"} 
+      <br />
       <h2>Your Cart</h2>
-      <div>
+      </h5>
+      <hr />
+      <div >
         {Cart.map((item) => (
           <CartProducts
             id={item.id}
@@ -30,6 +33,7 @@ const UserCart = () => {
             ratings={item.ratings}
           />
         ))}
+        <hr />
         {toshowsubtotal(Cart?.length)}
       </div>
     </div>
