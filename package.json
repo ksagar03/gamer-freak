@@ -17,6 +17,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "react-stripe": "^0.1.0",
+    "react-stripe-checkout": "^2.6.3",
     "stripe": "^12.2.0",
     "web-vitals": "^2.1.4"
   },
