@@ -1,3 +1,4 @@
+const functions =require("firebase-functions")
 const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")(
@@ -51,6 +52,7 @@ app.post("/payment/create", (req, res) => {
     .catch((err) => console.log(err)); 
 });
 
-app.listen(8484, () =>
-  console.log("this website will be listening at port 8484")
-);
+exports.api= functions.https.onRequest(app)
+// app.listen(8484, () =>
+//   console.log("this website will be listening at port 8484")
+// );

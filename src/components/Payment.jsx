@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "./StateProvider";
 import CartProducts from "./CartProducts";
 import { Link } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import CurrencyFormat from "react-currency-format";
 import { final_subtotal } from "./Reducer";
+import AxiosToFetch from "../axios";
 const Payment = () => {
   const [{ Cart }] = useStateValue();
   const [product, setProduct] = useState();
+  const [clientSecretKey, setClientSecretKey] = useState("");
   var total_price = final_subtotal(Cart);
   let Public_key =
     "pk_test_51Lx20gSHgvSf9YWJnU5hpwZ8HmOUodPhMjoimQNjuu1GPQumoAV0ip6OficVVnszkjpFijVv5Kl8Amt0imLnt3pD00MtJASpXe";
+  useEffect(() => {
+    const toGetClientSecretKey = async () => {
+      const response = await AxiosToFetch({
+        method: "post",
+        url: `payment/create?total=${final_subtotal(Cart) * 100}`,
+        // In above code we have given a url which will featch a secret key from clint side
+        //  this secret chnages when ever we add or remove item from the basket
+        // here we have multiplied a function with 100 and this is beacuse stripe only accepts currency
+        // in sub currency format(i.e 1rupee in 100paise )
+      });
+      setClientSecretKey(response.data.clientSecret);
+    };
+    toGetClientSecretKey();
+  }, [Cart]);
+  // the above useeffect is used to create a unique key to make payment ,
+  //useEffect is like a function which will be executed at the start of the application(i.e it exuctes only one time), but by introducing "[Cart]" dependency, useEffect function will execute when ever there is change in the "Cart"
   return (
     <div className="container-fluid">
       <h2 className="text-center p-2">
@@ -55,7 +73,7 @@ const Payment = () => {
           <div className="card-title text-center pt-1">
             <StripeCheckout
               stripeKey={Public_key}
-              token=""
+              token={clientSecretKey}
               name="Buy items"
               amount={total_price * 100}
               currency="INR"
