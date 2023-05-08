@@ -1,4 +1,4 @@
-const functions =require("firebase-functions")
+const functions = require("firebase-functions");
 const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")(
@@ -19,9 +19,9 @@ app.use(cors());
 app.get("/", (req, res) => res.send("our website backend is up"));
 
 app.post("/payment/create", (req, res) => {
-  const { product, token } = req.body;
-  console.log("Product", product);
-  console.log("price", product.price);
+  const { token } = req.body;
+  // console.log("Product", product);
+  // console.log("price", product.price);
   const idempotencyKey = uuid();
   // this above command is used to create a unique id when ever user request for payment, this unique id will stop us from charging the payment twice
 
@@ -33,11 +33,11 @@ app.post("/payment/create", (req, res) => {
     .then((customer) => {
       stripe.charges.create(
         {
-          amount: product.price * 100,
+          // amount: product.price * 100,
           currency: "INR",
           customer: customer.id,
           receipt_email: token.email,
-          discription: `your products ${product.name}`,
+          // discription: `your products ${product.name}`,
           shipping: {
             name: token.card.name,
             address: {
@@ -49,10 +49,10 @@ app.post("/payment/create", (req, res) => {
       );
     })
     .then((result) => res.status(200).json(result))
-    .catch((err) => console.log(err)); 
+    .catch((err) => console.log(err.response.data));
 });
 
-exports.api= functions.https.onRequest(app)
+exports.api = functions.https.onRequest(app);
 // app.listen(8484, () =>
 //   console.log("this website will be listening at port 8484")
 // );

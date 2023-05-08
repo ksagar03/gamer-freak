@@ -8,7 +8,7 @@ import { final_subtotal } from "./Reducer";
 import AxiosToFetch from "../axios";
 const Payment = () => {
   const [{ Cart }] = useStateValue();
-  const [product, setProduct] = useState();
+  // const [product, setProduct] = useState();
   const [clientSecretKey, setClientSecretKey] = useState("");
   var total_price = final_subtotal(Cart);
   let Public_key =
@@ -23,10 +23,13 @@ const Payment = () => {
         // here we have multiplied a function with 100 and this is beacuse stripe only accepts currency
         // in sub currency format(i.e 1rupee in 100paise )
       });
-      setClientSecretKey(response.data.clientSecret);
+      console.log(response);
+      // setClientSecretKey(response.data.clientSecret);
     };
     toGetClientSecretKey();
   }, [Cart]);
+
+  console.log(clientSecretKey);
   // the above useeffect is used to create a unique key to make payment ,
   //useEffect is like a function which will be executed at the start of the application(i.e it exuctes only one time), but by introducing "[Cart]" dependency, useEffect function will execute when ever there is change in the "Cart"
   return (
