@@ -9,7 +9,7 @@ const Home = () => {
       <div className="container-fluid">
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-1">
           <Cards
-            id={0}
+            id={"price_1N6xJFSHgvSf9YWJ4YXigmpC"}
             image={
               "https://m.media-amazon.com/images/I/81A3penuVOL._AC_UY327_FMwebp_QL65_.jpg"
             }
@@ -18,7 +18,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={1}
+            id={"price_1N6xNhSHgvSf9YWJhOH2RxQH"}
             image={
               "https://m.media-amazon.com/images/I/81rkaPIoglL._SL1500_.jpg"
             }
@@ -28,7 +28,7 @@ const Home = () => {
             ratings={5}
           />
           <Cards
-            id={2}
+            id={"price_1N6xQ2SHgvSf9YWJ5Mj2eK3Q"}
             image={
               "https://m.media-amazon.com/images/I/81HK954c4LL._SX679_.jpg"
             }
@@ -37,7 +37,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={3}
+            id={"price_1N6xamSHgvSf9YWJg7IdAbuR"}
             image={
               "https://m.media-amazon.com/images/I/61MoK1iMIDL._SX679_.jpg"
             }
@@ -46,7 +46,7 @@ const Home = () => {
             ratings={3}
           />
           <Cards
-            id={4}
+            id={"price_1N6xXjSHgvSf9YWJvYILJpLE"}
             image={
               "https://m.media-amazon.com/images/I/81dqVCIh4DS._AC_UL480_FMwebp_QL65_.jpg"
             }
@@ -55,7 +55,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={5}
+            id={"price_1N6xdTSHgvSf9YWJwhK3jIVw"}
             image={
               "https://m.media-amazon.com/images/I/61eWHqJJX2L._AC_UY327_FMwebp_QL65_.jpg"
             }
@@ -64,7 +64,7 @@ const Home = () => {
             ratings={5}
           />
           <Cards
-            id={6}
+            id={"price_1N6xfhSHgvSf9YWJwynnCHx3"}
             image={
               "https://m.media-amazon.com/images/I/51XaTRLDaIL._AC_UY327_FMwebp_QL65_.jpg"
             }
