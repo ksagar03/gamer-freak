@@ -1,14 +1,19 @@
 // const functions = require("firebase-functions");
-// const cors = require("cors");
+import AxiosToFetch from "../src/axios";
+ const cors = require("cors");
 const express = require("express");
 const stripe = require("stripe")(
   process.env.REACT_APP_STRIPE_S_KEY
 );
 
 // This is your test secret API key.
-
+// config
 const app = express();
-app.use(express.static('public'));
+
+// midleware
+app.use(express.json())
+app.use(cors()) //CORS == cross object references
+app.use(express.static('public'));  // to utilize the static files
 
 const YOUR_DOMAIN = 'http://localhost:4242';
 
@@ -22,7 +27,7 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
+    success_url: "http://127.0.0.1:5001/gamer-freak/us-central1/api/order",
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
 

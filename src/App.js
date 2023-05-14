@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useStateValue } from "./components/StateProvider";
 import Payment from "./components/Payment";
+import Order from "./components/Order";
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -19,11 +20,11 @@ function App() {
           type: "USER_NAME",
           user_name: user.displayName,
         });
-      }else {
+      } else {
         dispatch({
           type: "USER_NAME",
-          user_name: null
-        })
+          user_name: null,
+        });
       }
       console.log(user);
     });
@@ -70,12 +71,21 @@ function App() {
           }
         />
         <Route
-        path="/payment"
-        element={
-        <div>
-          <Payment/>
-        </div>
-        }/>
+          path="/payment"
+          element={
+            <div>
+              <Payment />
+            </div>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <div>
+              <Order />
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );
