@@ -12,25 +12,23 @@ app.use(express.json());
 app.use(cors()); //CORS == cross object references
 app.get("/", (req, res) => res.send("hello it is working"));
 app.post("/payment/create", async (req, res) => {
- const total=req.query.total
- const paymentIntent = await stripe.paymentIntents.create({
-  amount: total,
-  currency: "INR",
-  automatic_payment_methods: {
-    enabled: true
-  }
- })
- res.status(201).send({
-  ClientSecret: paymentIntent.Client_secret,
- })
-  
-
-
+  const total = req.query.total;
+  console.log(total);
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: total,
+    currency: "INR",
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+  console.log(paymentIntent);
+  res.status(201).send({
+    ClientSecret: paymentIntent.client_secret,
+  });
 });
 // app.listen(4001, ()=> console.log("listening at port 4001"))
 
 exports.api = functions.https.onRequest(app);
-
 
 // console.log(req.data);
 // const session = await stripe.checkout.sessions.create({
@@ -39,7 +37,7 @@ exports.api = functions.https.onRequest(app);
 //       // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
 //       price: "price_1N6xNhSHgvSf9YWJhOH2RxQH",
 //     },
-    
+
 //   ],
 //   mode: "payment",
 //   success_url: "http://127.0.0.1:5001/gamer-freak/us-central1/api/order ",

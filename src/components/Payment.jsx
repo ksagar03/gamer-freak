@@ -10,35 +10,32 @@ import {
 } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { final_subtotal } from "./Reducer";
-import AxiosToFetch from "../axios";
 import { db } from "../firebase";
 
-const Payment = () => {
+const Payment = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [clientSecret, setClientSecret] = useState("");
-  const [{ Cart, user },dispatch] = useStateValue();
+  const [{ Cart, user }, dispatch] = useStateValue();
 
   let total_price = final_subtotal(Cart);
   useEffect(() => {
     if (!stripe) {
       return;
     }
-    const toGetClientSecretKey = () => {
-      const response = AxiosToFetch.post(
-        `/payment/create?total=${final_subtotal(Cart) * 100}`
-      );
-      setClientSecret(response.data.clientSecret);
-    };
+    // const toGetClientSecretKey = () => {
+    //   const response = AxiosToFetch.post(
+    //     `/payment/create?total=${final_subtotal(Cart) * 100}`
+    //   );
+    //   setClientSecret(response.data.clientSecret);
+    // };
     //   // In above code we have given a url which will featch a secret key from clint side
     //   //  this secret chnages when ever we add or remove item from the basket
     //   // here we have multiplied a function with 100 and this is beacuse stripe only accepts currency
     //   // in sub currency format(i.e 1rupee in 100paise )
-
     if (!clientSecret) {
       return;
     }
@@ -68,6 +65,7 @@ const Payment = () => {
     const { error } = await stripe
       .confirmPayment({
         elements,
+        clientSecret,
         confirmParams: {
           return_url: navigate("/order"),
         },
@@ -81,12 +79,12 @@ const Payment = () => {
             Cart: Cart,
             amount: paymentIntent.amount,
             created: paymentIntent.created,
-      });
+          });
       });
 
-      dispatch({
-        type: "EMPTY_BASKET"
-      })
+    dispatch({
+      type: "EMPTY_BASKET",
+    });
 
     if (error.type === "card_error" || error.type === "validation error") {
       setMessage(error.message);
@@ -94,6 +92,9 @@ const Payment = () => {
       setMessage("An unexpected error occured");
     }
     setIsLoading("false");
+  };
+  const paymentElementOptions = {
+    layout: "tabs",
   };
 
   return (
@@ -120,7 +121,13 @@ const Payment = () => {
       </div>
       <hr />
       <div className="card container " style={{ width: "30rem" }}>
-        <div className="card-body">
+        <div className="card-body" onSubmit={handlesubmit}>
+          <div className="card-title">
+            <PaymentElement
+              id="payment-element"
+              options={paymentElementOptions}
+            />
+          </div>
           <div className="card-title text-dark">
             <CurrencyFormat
               renderText={(value) => (
@@ -137,9 +144,9 @@ const Payment = () => {
               prefix="₹"
             />
           </div>
+
           <div className="card-title text-center pt-1">
             <button
-              onClick={handlesubmit}
               className=" btn btn-warning "
               style={{ minWidth: "20rem" }}
               disabled={total_price === 0 ? true : false}
