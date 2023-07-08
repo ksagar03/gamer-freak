@@ -23,7 +23,7 @@ app.post("/payment/create", async (req, res) => {
   });
   console.log(paymentIntent);
   res.status(201).send({
-    ClientSecret: paymentIntent.client_secret,
+    clientSecret: paymentIntent.client_secret,
   });
 });
 // app.listen(4001, ()=> console.log("listening at port 4001"))

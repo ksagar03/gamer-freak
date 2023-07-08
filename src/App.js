@@ -16,7 +16,7 @@ import AxiosToFetch from "./axios";
 import { final_subtotal } from "./components/Reducer";
 function App() {
   const [{ Cart }, dispatch] = useStateValue();
-  const [clientSecret, setClientSecret] = useState("");
+  const [secret, setSecret] = useState("");
   // const promise= loadStripe(process.env.REACT_APP_STRIPE_KEY)
   const promise = loadStripe(
     "pk_test_51Lx20gSHgvSf9YWJnU5hpwZ8HmOUodPhMjoimQNjuu1GPQumoAV0ip6OficVVnszkjpFijVv5Kl8Amt0imLnt3pD00MtJASpXe"
@@ -38,26 +38,34 @@ function App() {
       }
       console.log(user);
     });
+  }, [Cart, dispatch]);
+
+  useEffect(() => {
     console.log(final_subtotal(Cart));
     const finalSubtotal = final_subtotal(Cart);
     if (finalSubtotal === 0) {
       return;
     } else {
-      AxiosToFetch.post(
-        `/payment/create?total=${final_subtotal(Cart) * 100}`
-      ).then((data) => {
-        console.log(data);
-        setClientSecret(data.ClientSecret);
-      });
+      const to_getsecret_key = async () => {
+        await AxiosToFetch({
+          method: "post",
+          url: `/payment/create?total=${final_subtotal(Cart) * 100}`,
+        }).then((data) => {
+          // console.log(data.data.clientSecret);
+          // const client_secret = () => data.clientSecret;
+          setSecret(data.data.clientSecret);
+        });
+      };
+      to_getsecret_key();
     }
-  }, [Cart, dispatch]);
-  console.log(clientSecret);
+  }, [Cart]);
+  console.log(secret);
   const appearance = {
     theme: "stripe",
   };
   const options = {
-    clientSecret,
-    appearance,
+    clientSecret: secret,
+    appearance: appearance,
   };
   return (
     <Router>
@@ -105,7 +113,7 @@ function App() {
           element={
             <div>
               <Elements stripe={promise} options={options}>
-                <Payment clientSecret={clientSecret} />
+                <Payment clientSecret={secret} />
               </Elements>
             </div>
           }

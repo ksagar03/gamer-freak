@@ -65,7 +65,6 @@ const Payment = ({ clientSecret }) => {
     const { error } = await stripe
       .confirmPayment({
         elements,
-        clientSecret,
         confirmParams: {
           return_url: navigate("/order"),
         },
