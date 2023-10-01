@@ -4,7 +4,6 @@ import CartProducts from "./CartProducts";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PaymentElement,
-  LinkAuthenticationElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
@@ -12,7 +11,7 @@ import CurrencyFormat from "react-currency-format";
 import { final_subtotal } from "./Reducer";
 import { db } from "../firebase";
 
-const Payment = ({ clientSecret }) => {
+const Payment = () => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -22,45 +21,48 @@ const Payment = ({ clientSecret }) => {
   const [{ Cart, user }, dispatch] = useStateValue();
 
   let total_price = final_subtotal(Cart);
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-    // const toGetClientSecretKey = () => {
-    //   const response = AxiosToFetch.post(
-    //     `/payment/create?total=${final_subtotal(Cart) * 100}`
-    //   );
-    //   setClientSecret(response.data.clientSecret);
-    // };
-    //   // In above code we have given a url which will featch a secret key from clint side
-    //   //  this secret chnages when ever we add or remove item from the basket
-    //   // here we have multiplied a function with 100 and this is beacuse stripe only accepts currency
-    //   // in sub currency format(i.e 1rupee in 100paise )
-    if (!clientSecret) {
-      return;
-    }
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("payment succeeded");
-          break;
-        case "processing":
-          setMessage("payment processing");
-          break;
-        case "requires_payment_method":
-          setMessage("payment was un-successful, please try again later ");
-          break;
-        default:
-          setMessage("something went wrong.");
-          break;
-      }
-    });
-  }, [stripe, Cart, clientSecret]);
+  // useEffect(() => {
+  //   if (!stripe) {
+  //     return;
+  //   }
+  //   // const toGetClientSecretKey = () => {
+  //   //   const response = AxiosToFetch.post(
+  //   //     `/payment/create?total=${final_subtotal(Cart) * 100}`
+  //   //   );
+  //   //   setClientSecret(response.data.clientSecret);
+  //   // };
+  //   //   // In above code we have given a url which will featch a secret key from clint side
+  //   //   //  this secret chnages when ever we add or remove item from the basket
+  //   //   // here we have multiplied a function with 100 and this is beacuse stripe only accepts currency
+  //   //   // in sub currency format(i.e 1rupee in 100paise )
+  //   if (!clientSecret) {
+  //     return;
+  //   }
+  //   // stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+  //   //   switch (paymentIntent.status) {
+  //   //     case "succeeded":
+  //   //       setMessage("payment succeeded");
+  //   //       break;
+  //   //     case "processing":
+  //   //       setMessage("payment processing");
+  //   //       break;
+  //   //     case "requires_payment_method":
+  //   //       setMessage("payment was un-successful, please try again later ");
+  //   //       break;
+  //   //     default:
+  //   //       setMessage("something went wrong.");
+  //   //       break;
+  //   //   }
+  //   // });
+  // }, [stripe, Cart, clientSecret]);
   // the above useeffect is used to create a unique key to make payment ,
   //useEffect is like a function which will be executed at the start of the application(i.e it exuctes only one time), but by introducing "[Cart]" dependency, useEffect function will execute when ever there is change in the "Cart"
 
   const handlesubmit = async (e) => {
     e.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    }
     setIsLoading(true);
     const { error } = await stripe
       .confirmPayment({
@@ -119,15 +121,16 @@ const Payment = ({ clientSecret }) => {
         ))}
       </div>
       <hr />
-      <div className="card container " style={{ width: "30rem" }}>
-        <div className="card-body" onSubmit={handlesubmit}>
+      <form
+        className="card container bg-dark "
+        style={{ width: "30rem" }}
+        onSubmit={handlesubmit}
+      >
+        <div className="card-body">
           <div className="card-title">
-            <PaymentElement
-              id="payment-element"
-              options={paymentElementOptions}
-            />
+            <PaymentElement options={paymentElementOptions} />
           </div>
-          <div className="card-title text-dark">
+          <div className="card-title ">
             <CurrencyFormat
               renderText={(value) => (
                 <>
@@ -148,13 +151,14 @@ const Payment = ({ clientSecret }) => {
             <button
               className=" btn btn-warning "
               style={{ minWidth: "20rem" }}
-              disabled={total_price === 0 ? true : false}
+              disabled={total_price === 0 ? true : false && isLoading}
             >
               Buy Now
             </button>
+            <div className="text-danger pt-1">{message}</div>
           </div>
         </div>
-      </div>
+      </form>
       <hr />
     </div>
   );

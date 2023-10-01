@@ -16,7 +16,7 @@ import AxiosToFetch from "./axios";
 import { final_subtotal } from "./components/Reducer";
 function App() {
   const [{ Cart }, dispatch] = useStateValue();
-  const [secret, setSecret] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
   // const promise= loadStripe(process.env.REACT_APP_STRIPE_KEY)
   const promise = loadStripe(
     "pk_test_51Lx20gSHgvSf9YWJnU5hpwZ8HmOUodPhMjoimQNjuu1GPQumoAV0ip6OficVVnszkjpFijVv5Kl8Amt0imLnt3pD00MtJASpXe"
@@ -51,21 +51,21 @@ function App() {
           method: "post",
           url: `/payment/create?total=${final_subtotal(Cart) * 100}`,
         }).then((data) => {
-          // console.log(data.data.clientSecret);
-          // const client_secret = () => data.clientSecret;
-          setSecret(data.data.clientSecret);
+          console.log(data);
+          setClientSecret(data.data.clientSecret);
         });
       };
       to_getsecret_key();
     }
   }, [Cart]);
-  console.log(secret);
+  console.log(clientSecret);
   const appearance = {
-    theme: "stripe",
+    theme: "night",
+    labels: "floating,",
   };
   const options = {
-    clientSecret: secret,
-    appearance: appearance,
+    clientSecret,
+    appearance,
   };
   return (
     <Router>
@@ -112,9 +112,11 @@ function App() {
           path="/payment"
           element={
             <div>
-              <Elements stripe={promise} options={options}>
-                <Payment clientSecret={secret} />
-              </Elements>
+              {clientSecret && (
+                <Elements stripe={promise} options={options}>
+                  <Payment />
+                </Elements>
+              )}
             </div>
           }
         />
