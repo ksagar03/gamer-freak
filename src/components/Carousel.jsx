@@ -1,5 +1,5 @@
 import React from "react";
-/* this Carousel is used to brig the sliding effect of the image in the website 
+/* this Carousel is used to bring the sliding effect of the image in the website 
  class carousel-indicators -> is used to provide indicators over the image so that user can slide to any image 
  class carousel-inner -> this class is used to add the slides inside this class we define the class "carousel-item"
 */
@@ -40,7 +40,7 @@ const Carousel = () => {
           ></button>
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          <div className="carousel-item">
             <img
               style={{ height: "80vh" }}
               src="https://img.youtube.com/vi/CU_dlbxpbjE/hqdefault.jpg"

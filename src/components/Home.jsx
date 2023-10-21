@@ -9,7 +9,7 @@ const Home = () => {
       <div className="container-fluid">
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-1">
           <Cards
-            id={"price_1N6xJFSHgvSf9YWJ4YXigmpC"}
+            id={1}
             image={
               "https://m.media-amazon.com/images/I/81A3penuVOL._AC_UY327_FMwebp_QL65_.jpg"
             }
@@ -18,7 +18,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={"price_1N6xNhSHgvSf9YWJhOH2RxQH"}
+            id={2}
             image={
               "https://m.media-amazon.com/images/I/81rkaPIoglL._SL1500_.jpg"
             }
@@ -28,7 +28,7 @@ const Home = () => {
             ratings={5}
           />
           <Cards
-            id={"price_1N6xQ2SHgvSf9YWJ5Mj2eK3Q"}
+            id={3}
             image={
               "https://m.media-amazon.com/images/I/81HK954c4LL._SX679_.jpg"
             }
@@ -37,7 +37,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={"price_1N6xamSHgvSf9YWJg7IdAbuR"}
+            id={4}
             image={
               "https://m.media-amazon.com/images/I/61MoK1iMIDL._SX679_.jpg"
             }
@@ -46,7 +46,8 @@ const Home = () => {
             ratings={3}
           />
           <Cards
-            id={"price_1N6xXjSHgvSf9YWJvYILJpLE"}
+          id = {5}
+            // id={"price_1N6xXjSHgvSf9YWJvYILJpLE"} // this ID is used for stripe but now it is not required
             image={
               "https://m.media-amazon.com/images/I/81dqVCIh4DS._AC_UL480_FMwebp_QL65_.jpg"
             }

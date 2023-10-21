@@ -13,7 +13,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         Cart: [...state.Cart, action.item],
-        // state.Basket --> means current item present inside basket(array)
+        // state.Cart --> means current item present inside Cart(array)
         //  action.item--> means the product which will be added to basket
         // here ...state defines the current state(for eg: if we have 2 products in our cart then
         // that will be our current state )

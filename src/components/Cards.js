@@ -2,6 +2,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Currency from "./Currency";
 import { useStateValue } from "./StateProvider";
 
+
 const Cards = ({ id, image, title, price, ratings }) => {
   const [{ Cart }, dispatch] = useStateValue();
   const add_to_cart = () => {
@@ -39,7 +40,7 @@ const Cards = ({ id, image, title, price, ratings }) => {
           <div className="text-center">
             <button
               type="button"
-              className="btn btn-outline-warning btn-block text-center text-white avtive"
+              className="btn btn-outline-warning btn-block text-center text-white"
               onClick={add_to_cart}
             >
               Add To Cart

@@ -36,12 +36,12 @@ function App() {
           user_name: null,
         });
       }
-      console.log(user);
+      // console.log(user);
     });
   }, [Cart, dispatch]);
 
   useEffect(() => {
-    console.log(final_subtotal(Cart));
+    // console.log(final_subtotal(Cart));
     const finalSubtotal = final_subtotal(Cart);
     if (finalSubtotal === 0) {
       return;
