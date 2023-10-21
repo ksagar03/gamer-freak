@@ -10,21 +10,30 @@ const app = express();
 
 app.use(express.json());
 app.use(cors()); //CORS == cross object references
-app.get("/", (req, res) => res.send("hello it is working"));
+app.get("/config", (req, res) =>
+  res.send({
+    publishablekey:
+      "pk_test_51Lx20gSHgvSf9YWJnU5hpwZ8HmOUodPhMjoimQNjuu1GPQumoAV0ip6OficVVnszkjpFijVv5Kl8Amt0imLnt3pD00MtJASpXe",
+  })
+);
 app.post("/payment/create", async (req, res) => {
   const total = req.query.total;
   console.log(total);
   const paymentIntent = await stripe.paymentIntents.create({
     amount: total,
-    currency: "inr",
-    automatic_payment_methods: { enabled: true },
+    currency: "INR",
+    payment_method_types: ["card"],
+    // automatic_payment_methods: { enabled: true },
   });
   console.log(paymentIntent);
   res.status(201).send({
     clientSecret: paymentIntent.client_secret,
   });
 });
-// app.listen(4001, ()=> console.log("listening at port 4001"))
+
+// app.listen(5252, () =>
+//   console.log(`Node server listening at http://localhost:5252`)
+// );
 
 exports.api = functions.https.onRequest(app);
 

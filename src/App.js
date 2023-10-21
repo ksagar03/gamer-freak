@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import { useStateValue } from "./components/StateProvider";
 import Payment from "./components/Payment";
+import Payments from "./components/Payments";
 import Order from "./components/Order";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -16,11 +17,8 @@ import AxiosToFetch from "./axios";
 import { final_subtotal } from "./components/Reducer";
 function App() {
   const [{ Cart }, dispatch] = useStateValue();
-  const [clientSecret, setClientSecret] = useState("");
+  // const [clientSecret, setClientSecret] = useState("");
   // const promise= loadStripe(process.env.REACT_APP_STRIPE_KEY)
-  const promise = loadStripe(
-    "pk_test_51Lx20gSHgvSf9YWJnU5hpwZ8HmOUodPhMjoimQNjuu1GPQumoAV0ip6OficVVnszkjpFijVv5Kl8Amt0imLnt3pD00MtJASpXe"
-  );
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -40,33 +38,33 @@ function App() {
     });
   }, [Cart, dispatch]);
 
-  useEffect(() => {
-    // console.log(final_subtotal(Cart));
-    const finalSubtotal = final_subtotal(Cart);
-    if (finalSubtotal === 0) {
-      return;
-    } else {
-      const to_getsecret_key = async () => {
-        await AxiosToFetch({
-          method: "post",
-          url: `/payment/create?total=${final_subtotal(Cart) * 100}`,
-        }).then((data) => {
-          console.log(data);
-          setClientSecret(data.data.clientSecret);
-        });
-      };
-      to_getsecret_key();
-    }
-  }, [Cart]);
-  console.log(clientSecret);
-  const appearance = {
-    theme: "night",
-    labels: "floating,",
-  };
-  const options = {
-    clientSecret,
-    appearance,
-  };
+  // useEffect(() => {
+  //   // console.log(final_subtotal(Cart));
+  //   const finalSubtotal = final_subtotal(Cart);
+  //   if (finalSubtotal === 0) {
+  //     return;
+  //   } else {
+  //     const to_getsecret_key = async () => {
+  //       await AxiosToFetch({
+  //         method: "post",
+  //         url: `/payment/create?total=${final_subtotal(Cart) * 100}`,
+  //       }).then((data) => {
+  //         console.log(data);
+  //         setClientSecret(data.data.clientSecret);
+  //       });
+  //     };
+  //     to_getsecret_key();
+  //   }
+  // }, [Cart]);
+  // console.log(clientSecret);
+  // const appearance = {
+  //   theme: "night",
+  //   labels: "floating,",
+  // };
+  // const options = {
+  //   clientSecret,
+  //   appearance,
+  // };
   return (
     <Router>
       <Routes>
@@ -112,11 +110,7 @@ function App() {
           path="/payment"
           element={
             <div>
-              {clientSecret && (
-                <Elements stripe={promise} options={options}>
-                  <Payment />
-                </Elements>
-              )}
+              <Payments />
             </div>
           }
         />
@@ -134,3 +128,9 @@ function App() {
 }
 
 export default App;
+
+/* {clientSecret && (
+                // <Elements stripe={promise} options={options}>
+                //   <Payment />
+                // </Elements>
+              // )} */
