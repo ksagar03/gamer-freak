@@ -7,6 +7,10 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { IconButton } from "@mui/material";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 const Login = () => {
   const navigate = useNavigate();
   // const [username, setUsername] = useState("");
@@ -24,6 +28,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [clicked, setClicked] = useState(true);
   const LogIN = (e) => {
     e.preventDefault(); // this line will prevent from reloading the page whenever we click on the btn
     if (!loginvalues.email || !loginvalues.password) {
@@ -102,7 +107,7 @@ const Login = () => {
                           </div>
                           <div className="form-group mt-2">
                             <input
-                              type="password"
+                              type={clicked ? "password" : "text"}
                               // value={password}
                               onChange={(e) =>
                                 setLoginvalues((prev) => ({
@@ -115,8 +120,20 @@ const Login = () => {
                               placeholder="Your Password"
                               id="log_password"
                               autoComplete="off"
-                            />
+                            ></input>
                             <i className="input-icon uil uil-lock-alt"></i>
+                            <div
+                              className="pwdvisibility"
+                              onClick={() => {
+                                setClicked(!clicked);
+                              }}
+                            >
+                              {clicked ? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )}
+                            </div>
                           </div>
                           <p className="mt-4" style={{ color: "red" }}>
                             {errormsg}
@@ -177,7 +194,7 @@ const Login = () => {
                           </div>
                           <div className="form-group mt-2">
                             <input
-                              type="password"
+                              type={clicked ? "password" : "text"}
                               // value={signuppassword}
                               onChange={(e) =>
                                 setSignupvalues((prev) => ({
@@ -192,6 +209,18 @@ const Login = () => {
                               autoComplete="off"
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
+                            <div
+                              className="pwdvisibility"
+                              onClick={() => {
+                                setClicked(!clicked);
+                              }}
+                            >
+                              {clicked ? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )}
+                            </div>
                           </div>
                           <p className="mt-4" style={{ color: "red" }}>
                             {errormsg}

@@ -48,7 +48,7 @@ const SignIn = () => {
                 </button>
                 <p className="mb-0">
                   Don't have an account?{" "}
-                  <Link className="text-white-50 fw-bold">Sign up</Link>
+                  <Link className="text-white-50 fw-bold">Sig up</Link>
                 </p>
               </div>
             </div>

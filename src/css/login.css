@@ -14,7 +14,7 @@ a {
   transition: all 200ms linear;
 }
 a:hover {
-  text-decoration:none;
+  text-decoration: none;
 }
 .link {
   color: #c4c3ca;
@@ -167,15 +167,27 @@ h6 span {
   transition: all 200ms linear;
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
 }
-i{
+i {
   position: absolute;
-  top:0;
-  right:89%;
+  top: 0;
+  right: 89%;
   width: 30px;
   height: 100%;
   display: flex;
   align-items: center;
   font-size: 25px;
   color: rgba(207, 241, 14, 0.868);
+}
 
+.pwdvisibility {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 5%;
+  width: 30px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  color: rgba(207, 241, 14, 0.868);
 }
