@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { final_subtotal } from "./Reducer";
 import { useStateValue } from "./StateProvider";
 import CurrencyFormat from "react-currency-format";
+import { db } from "../firebase";
+import { doc, collection, setDoc } from "firebase/firestore";
 
 const CheckoutForm = () => {
-  const [{ Cart }, dispatch] = useStateValue();
+  const [{ Cart, user }, dispatch] = useStateValue();
   let total_price = final_subtotal(Cart);
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -24,17 +26,67 @@ const CheckoutForm = () => {
     }
     setProcessing(true);
     console.log(elements);
-    const { error } = await stripe.confirmPayment({
+    const usersCollection = collection(db, "users");
+    const userDoc = doc(usersCollection, user?.uid);
+    const userOrderCollection = collection(userDoc, "orders");
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: navigate("/order"),
+        // return_url: "https://gamer-freak.web.app/order",
+        return_url: "http://localhost:3000/order",
       },
+      redirect: "if_required",
+      //  this above code will only redirect when the it required
+      // i Have written this because the below what and all code i have written are not executing due to redirecting
     });
-    console.log(elements);
+
     if (error) {
       setMessage(error.message);
+    } else if (paymentIntent && user) {
+      const userOrderDoc = doc(userOrderCollection, paymentIntent.id);
+
+      console.log("userOrder path has been defined");
+      await setDoc(userOrderDoc, {
+        Cart: Cart,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created,
+      });
     }
+    // .then(({ paymentIntent }) => {
+    //   let setOrderdata = collection(
+    //     doc(collection(db, "users"), user?.id),
+    //     paymentIntent.id
+    //   );
+    //   console.log("orderdata", setOrderdata);
+    //   setDoc(setOrderdata, {
+    //     Cart: Cart,
+    //     amount: paymentIntent.amount,
+    //     created: paymentIntent.created,
+    //   });
+
+    // db.collection("users")
+    //   .doc(user?.uid)
+    //   .collection("orders")
+    //   .doc(paymentIntent.id)
+    //   .set({
+    //     Cart: Cart,
+    //     amount: paymentIntent.amount,
+    //     created: paymentIntent.created,
+    //   });
+
+    // set(ref(db, "users/" + user?.uid + "orders/" + paymentIntent.id), {
+    //   Cart: Cart,
+    //   amount: paymentIntent.amount,
+    //   created: paymentIntent.created, // .created will provide us the time stamp
+    // });
+    // });
+    // console.log(elements);
+
     setProcessing("false");
+    dispatch({
+      type: "EMPTY_BASKET",
+    });
+    navigate("/order");
   };
 
   return (
@@ -70,7 +122,7 @@ const CheckoutForm = () => {
             style={{ minWidth: "20rem" }}
             disabled={total_price === 0 ? true : false && processing}
           >
-            Buy Now
+            {processing ? "Processing..." : "Buy Now"}
           </button>
           <div className="text-danger pt-1">{message}</div>
         </div>

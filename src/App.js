@@ -15,6 +15,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import AxiosToFetch from "./axios";
 import { final_subtotal } from "./components/Reducer";
+import Carousel from "./components/Carousel";
 function App() {
   const [{ Cart }, dispatch] = useStateValue();
   // const [clientSecret, setClientSecret] = useState("");
@@ -122,6 +123,7 @@ function App() {
             </div>
           }
         />
+        <Route path="/cr" element ={ <Carousel />} />
       </Routes>
     </Router>
   );

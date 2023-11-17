@@ -1,11 +1,12 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { IconButton } from "@mui/material";
+import { IconButton, colors } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
 import { useStateValue } from "./StateProvider";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import MenuIcon from "@mui/icons-material/Menu";
 const Navbar = () => {
   const navigate = useNavigate();
   const [{ Cart, user_name }] = useStateValue();
@@ -25,8 +26,10 @@ const Navbar = () => {
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle Navigation"
+            style={{ color: "white" }}
           >
-            <span className="navbar-toggler-icon"></span>
+            <MenuIcon sx={{ color: "yellowgreen" }} />
+            {/* <span className="navbar-toggler-icon" style={{color: "yellowgreen"}}></span> */}
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto justify-content-end">

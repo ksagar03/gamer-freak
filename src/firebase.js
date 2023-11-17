@@ -4,9 +4,10 @@
 
 // this above comands are firebase version 8 command
 
-import {initializeApp} from "firebase/app"
-import {getAuth} from "firebase/auth";
-import {getDatabase} from "firebase/database"
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+// import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyB5NulY02NaTOlIkYBfoww6NqksaxnX-YE",
@@ -19,5 +20,5 @@ const firebaseConfig = {
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getDatabase(firebaseApp);
+const db = getFirestore(firebaseApp);
 export { auth, db };

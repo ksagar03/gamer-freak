@@ -40,7 +40,7 @@ const Carousel = () => {
           ></button>
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item">
+          <div className="carousel-item active">
             <img
               style={{ height: "80vh" }}
               src="https://img.youtube.com/vi/CU_dlbxpbjE/hqdefault.jpg"

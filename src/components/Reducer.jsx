@@ -11,7 +11,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return {
-        ...state,
+        ...state,   
         Cart: [...state.Cart, action.item],
         // state.Cart --> means current item present inside Cart(array)
         //  action.item--> means the product which will be added to basket
