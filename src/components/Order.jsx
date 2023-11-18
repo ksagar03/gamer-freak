@@ -8,7 +8,7 @@ import {
   onSnapshot,
   query,
   getDocs,
-  collectionGroup,
+  doc,
 } from "firebase/firestore";
 
 const Order = () => {
@@ -16,35 +16,46 @@ const Order = () => {
   // let getordercollection = collection(db, "users")
   const [yourOrders, setYourOrders] = useState([]);
   useEffect(() => {
-    if (user) {
-      let getordercollection = collectionGroup(
-        getDocs(collection(db, "users")),
-        "orders"
-      );
-      query(
-        getordercollection,
-        orderBy("created", "desc"),
-        onSnapshot((snapshot) =>
-          setYourOrders(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        )
-      );
-      // db.collection("users")
-      //   .doc(user?.uid)
-      //   .collection("orders")
-      //   .orderBy("created", "desc")
-      //   .onSnapshot((snapshot) =>
-      //     setYourOrders(
-      //       snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-      //     )
-      //   );
-      // const getdata = async () =>{
-      //  let getordercollection=collection(getDoc(collection(db ,"users")), "orders")
-      // }
-    } else {
-      setYourOrders([]);
-    }
+    const tofetchdata = async () => {
+      if (user) {
+        // let getordercollection = (
+        //   getDocs(collection(db, "users")),
+        //   "orders"
+        // );
+        const usercollecion = collection(db, "users");
+        const userDocs = doc(usercollecion, user?.uid);
+        try {
+          const fetchdata = await getDocs(userDocs, "orders");
+          query(
+            fetchdata,
+            orderBy("created", "desc"),
+            onSnapshot(fetchdata, (snapshot) =>
+              setYourOrders(
+                snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+              )
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+
+        // db.collection("users")
+        //   .doc(user?.uid)
+        //   .collection("orders")
+        //   .orderBy("created", "desc")
+        //   .onSnapshot((snapshot) =>
+        //     setYourOrders(
+        //       snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        //     )
+        //   );
+        // const getdata = async () =>{
+        //  let getordercollection=collection(getDoc(collection(db ,"users")), "orders")
+        // }
+      } else {
+        setYourOrders([]);
+      }
+    };
+    tofetchdata();
   }, [user]);
   console.log("user orders", yourOrders);
   return (

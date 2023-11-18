@@ -44,6 +44,8 @@ const CheckoutForm = () => {
       setMessage(error.message);
     } else if (paymentIntent && user) {
       const userOrderDoc = doc(userOrderCollection, paymentIntent.id);
+      // const userOrderData  = collection(doc(collection(db,"users"),user?.uid), paymentIntent.id)
+      // by using the above line I'm getting some error 
 
       console.log("userOrder path has been defined");
       await setDoc(userOrderDoc, {
@@ -63,24 +65,6 @@ const CheckoutForm = () => {
     //     amount: paymentIntent.amount,
     //     created: paymentIntent.created,
     //   });
-
-    // db.collection("users")
-    //   .doc(user?.uid)
-    //   .collection("orders")
-    //   .doc(paymentIntent.id)
-    //   .set({
-    //     Cart: Cart,
-    //     amount: paymentIntent.amount,
-    //     created: paymentIntent.created,
-    //   });
-
-    // set(ref(db, "users/" + user?.uid + "orders/" + paymentIntent.id), {
-    //   Cart: Cart,
-    //   amount: paymentIntent.amount,
-    //   created: paymentIntent.created, // .created will provide us the time stamp
-    // });
-    // });
-    // console.log(elements);
 
     setProcessing("false");
     dispatch({

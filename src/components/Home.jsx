@@ -56,7 +56,7 @@ const Home = () => {
             ratings={4}
           />
           <Cards
-            id={"price_1N6xdTSHgvSf9YWJwhK3jIVw"}
+            id={6}
             image={
               "https://m.media-amazon.com/images/I/61eWHqJJX2L._AC_UY327_FMwebp_QL65_.jpg"
             }
@@ -65,7 +65,7 @@ const Home = () => {
             ratings={5}
           />
           <Cards
-            id={"price_1N6xfhSHgvSf9YWJwynnCHx3"}
+            id={7}
             image={
               "https://m.media-amazon.com/images/I/51XaTRLDaIL._AC_UY327_FMwebp_QL65_.jpg"
             }
