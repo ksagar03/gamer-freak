@@ -52,11 +52,20 @@ const Navbar = () => {
                   >
                     <AccountCircleIcon sx={{ color: "white" }} />
                     <ul className="dropdown-menu">
-                      <li className="text-center ">
+                      <li>
                         <span className="dropdown-item-text">
                           Hello {user_name ? user_name : "Guest"},
                         </span>
                       </li>
+                      <li>
+                        <span className="dropdown-item" onClick={()=>{
+                          navigate("/order")
+                        }}>
+                        Your Orders
+                        </span>
+                        
+                      </li>
+                      
                       <li className="text-center">
                         <button
                           className="btn btn-warning btn-outline"

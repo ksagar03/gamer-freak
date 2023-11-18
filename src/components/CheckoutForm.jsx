@@ -32,8 +32,8 @@ const CheckoutForm = () => {
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // return_url: "https://gamer-freak.web.app/order",
-        return_url: "http://localhost:3000/order",
+        return_url: "https://gamer-freak.web.app/order",
+        // return_url: "http://localhost:3000/order",
       },
       redirect: "if_required",
       //  this above code will only redirect when the it required

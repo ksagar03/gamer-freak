@@ -119,7 +119,11 @@ function App() {
           path="/order"
           element={
             <div>
+              <Navbar/>
+              <div className="row mt-4">
               <Order />
+              </div>
+              
             </div>
           }
         />

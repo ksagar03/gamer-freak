@@ -5,7 +5,7 @@ import { useStateValue } from "./StateProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, IconButton } from "@mui/material";
 
-const CartProducts = ({ id, image, title, price, ratings }) => {
+const CartProducts = ({ id, image, title, price, ratings , hidebutton}) => {
   const [{ Cart }, dispatch] = useStateValue();
   function RemoveFromCart() {
     dispatch({
@@ -33,7 +33,7 @@ const CartProducts = ({ id, image, title, price, ratings }) => {
                 ))}
             </span>
             {/* bellow Button component is material ui component  */}
-            <Button 
+            { !hidebutton && <Button 
               variant="contained"
               onClick={RemoveFromCart}
               endIcon={<DeleteIcon />}
@@ -43,7 +43,7 @@ const CartProducts = ({ id, image, title, price, ratings }) => {
               {/* <IconButton>
                 <DeleteIcon sx={{ color: "white" }} />
               </IconButton> */}
-            </Button>
+            </Button>}
             {/* <button
               type="button"
               className="btn btn-outline-warning btn-block text-center text-white avtive"

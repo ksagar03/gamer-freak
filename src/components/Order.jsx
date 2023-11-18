@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "./StateProvider";
 import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import {
   getDoc,
   collection,
@@ -9,9 +10,13 @@ import {
   query,
   getDocs,
   doc,
+  collectionGroup,
 } from "firebase/firestore";
+import Ordersview from "./Ordersview";
+import Navbar from "./Navbar";
 
 const Order = () => {
+  const navgate = useNavigate();
   const [{ Cart, user }] = useStateValue();
   // let getordercollection = collection(db, "users")
   const [yourOrders, setYourOrders] = useState([]);
@@ -24,16 +29,27 @@ const Order = () => {
         // );
         const usercollecion = collection(db, "users");
         const userDocs = doc(usercollecion, user?.uid);
+        const tofetch = collection(userDocs, "orders");
+        console.log(tofetch);
+        // const q=  query(tofetch, orderBy("created", "desc") )
         try {
-          const fetchdata = await getDocs(userDocs, "orders");
-          query(
-            fetchdata,
-            orderBy("created", "desc"),
-            onSnapshot(fetchdata, (snapshot) =>
-              setYourOrders(
-                snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-              )
-            )
+          const fetchdata = await getDocs(tofetch, orderBy("created", "desc"));
+          console.log(fetchdata);
+          // query(
+          //   fetchdata,
+          //   orderBy("created", "desc"),
+          // onSnapshot(fetchdata, (snapshot) =>
+          //     setYourOrders(
+          //       snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+          //     )
+          //   )
+          // );
+
+          setYourOrders(
+            fetchdata.docs.map((values) => ({
+              id: values.id,
+              data: values.data(),
+            }))
           );
         } catch (error) {
           console.log(error);
@@ -57,11 +73,18 @@ const Order = () => {
     };
     tofetchdata();
   }, [user]);
-  console.log("user orders", yourOrders);
+  // console.log("user orders", yourOrders);
   return (
-    <>
-      <h2>Review your order</h2>
-    </>
+    <div className="container-fluid">
+      {/* <Navbar/> */}
+      <h1 className="mt-5">
+        {user
+          ? ` ${user?.displayName} Your Orders`
+          :"Please login to view your order"}
+      </h1>
+      <hr />
+      {user && yourOrders.map((order) => <Ordersview order={order} />)}
+    </div>
   );
 };
 
